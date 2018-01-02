@@ -66,9 +66,9 @@ task fatJar(type: Jar) {
     exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 
     manifest {
-        attributes 'Implementation-Title': 'NEM Push bot',
+        attributes 'Implementation-Title': 'NEM Push bot for Discord',
                 'Implementation-Version': version,
-                'Main-Class': 'io.ktor.server.netty.DevelopmentEngine'
+                'Main-Class': 'com.ryuta46.nempushbotdiscord.MainKt'
     }
     baseName = project.name + '-all'
     //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
