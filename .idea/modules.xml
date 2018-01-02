@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nem-push-bot-discord.iml" filepath="$PROJECT_DIR$/.idea/modules/nem-push-bot-discord.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nem-push-bot-discord_main.iml" filepath="$PROJECT_DIR$/.idea/modules/nem-push-bot-discord_main.iml" group="nem-push-bot-discord" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nem-push-bot-discord_test.iml" filepath="$PROJECT_DIR$/.idea/modules/nem-push-bot-discord_test.iml" group="nem-push-bot-discord" />
+    </modules>
+  </component>
+</project>

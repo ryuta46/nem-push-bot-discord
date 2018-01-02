@@ -1,0 +1,76 @@
+group 'com.ryuta46'
+version '0.1.0'
+
+buildscript {
+    ext.kotlin_version = '1.1.60'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://repo.bastian-oppermann.de'
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+
+    compile "de.btobastian.javacord:javacord:2.0.17"
+    compile "ch.qos.logback:logback-classic:1.1.3"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+
+    compile 'org.mapdb:mapdb:3.0.5'
+    // nem-kotlin
+    compile 'com.ryuta46:nem-kotlin:0.3.0'
+
+    // depended libraries
+    compile 'com.madgag.spongycastle:prov:1.51.0.0'
+    compile 'com.madgag.spongycastle:core:1.51.0.0'
+    compile 'net.i2p.crypto:eddsa:0.2.0'
+    compile 'com.google.code.gson:gson:2.8.2'
+
+    // for reactive and WebSocket
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+
+    // for WebSocket
+    compile 'org.java-websocket:Java-WebSocket:1.3.6'
+
+    testCompile 'junit:junit:4.11'
+
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+
+    manifest {
+        attributes 'Implementation-Title': 'NEM Push bot',
+                'Implementation-Version': version,
+                'Main-Class': 'io.ktor.server.netty.DevelopmentEngine'
+    }
+    baseName = project.name + '-all'
+    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
